@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @ToString
 @Component
-@PropertySource(value = {"classpath:zkConfig.properties"})
+@PropertySource(value = {"classpath:zk-config.properties"})
 public class ZKConfig {
 
     @Value("${addresses}")

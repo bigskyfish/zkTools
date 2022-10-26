@@ -4,11 +4,12 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.imps.CuratorFrameworkState;
 import org.apache.zookeeper.data.Stat;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DirReadResult {
+public class DirReadResult implements Serializable {
 
     private String rootPath;
     CuratorFramework curatorFramework;
@@ -120,6 +121,11 @@ public class DirReadResult {
         System.out.println("total cnt:" + getTotalCnt());
         System.out.println("ephemeral cnt:" + getEphemeralCnt());
         System.out.println("error cnt:" + getErrorCnt());
+    }
+
+    public void writeJson(){
+
+
     }
 
 }
