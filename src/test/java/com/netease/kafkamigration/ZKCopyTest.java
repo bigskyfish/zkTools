@@ -9,6 +9,7 @@ import org.apache.zookeeper.server.auth.SASLAuthenticationProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,13 +22,16 @@ public class ZKCopyTest {
     @Autowired
     ZKConfig zkConfig;
 
+    @Value("${json-path}")
+    String jsonPath;
+
     @Test
     public  void test() throws IOException {
         // ZKMigrateUtil.copy("127.0.0.1:2182", "127.0.0.1:2181", "/kafka-1019", "/kafka-1019");
         System.out.println(new DigestAuthenticationProvider().getScheme());
         System.out.println(new SASLAuthenticationProvider().getScheme());
         System.out.println(new IPAuthenticationProvider().getScheme());
-        ZKMigrateUtil.writeMigrateData(zkConfig);
+        ZKMigrateUtil.writeMigrateData(zkConfig, jsonPath);
     }
 
 }

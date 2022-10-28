@@ -14,6 +14,10 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -90,7 +94,7 @@ public class ZKMigrateUtil {
     }
 
 
-    public static void writeMigrateData(ZKConfig zkConfig) {
+    public static void writeMigrateData(ZKConfig zkConfig, String jsonPath) {
         System.setProperty("zookeeper.authProvider.1","org.apache.zookeeper.server.auth.SASLAuthenticationProvider");
         System.setProperty("java.security.auth.login.config","/Users/netease/operatorWorkSpace/zkTools/src/main/resources/zk-jaas.conf");
         System.setProperty(ZKClientConfig.LOGIN_CONTEXT_NAME_KEY,"Client");
@@ -101,9 +105,14 @@ public class ZKMigrateUtil {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonStr = objectMapper.writeValueAsString(getAllChildren(framework, zkConfig.getRootPath()));
-
+            FileOutputStream output = new FileOutputStream(jsonPath + "zkNode.json");
+            output.write(jsonStr.getBytes());
         } catch (JsonProcessingException e) {
 
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 
