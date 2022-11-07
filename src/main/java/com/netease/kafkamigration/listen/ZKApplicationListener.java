@@ -1,6 +1,7 @@
 package com.netease.kafkamigration.listen;
 
 import com.netease.kafkamigration.entity.ZKConfig;
+import com.netease.kafkamigration.util.ZKMigrateUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.imps.CuratorFrameworkState;
@@ -8,6 +9,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.client.ZKClientConfig;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 
@@ -19,6 +21,8 @@ public class ZKApplicationListener implements ApplicationListener {
     @Autowired
     private ZKConfig zkConfig;
 
+    @Value("${json-path}")
+    public String jsonPath;
 
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
@@ -34,6 +38,7 @@ public class ZKApplicationListener implements ApplicationListener {
         CuratorFrameworkState state = framework.getState();
         if(state==CuratorFrameworkState.LATENT) {
             framework.start();
+            ZKMigrateUtil.writeMigrateData(zkConfig, jsonPath);
         }
 
 
