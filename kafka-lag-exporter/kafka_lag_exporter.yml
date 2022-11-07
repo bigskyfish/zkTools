@@ -1,0 +1,9 @@
+kafka:
+  client_id: "test1107"
+  kafka_version: "2.7.1"
+  use_sasl: true
+  sasl_mechanism: "PLAIN"
+  use_sasl_handshake: true
+  sasl_username: "testadmin"
+  sasl_password: "admin123456"
+  boot_strap: ["127.0.0.1:9092"]
