@@ -45,9 +45,9 @@ func main() {
 	http.Handle(*metricsPath, promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`<html>
-             <head><title>Burrow Kafka Offsets Exporter</title></head>
+             <head><title>floatcloud Kafka Offsets Exporter</title></head>
              <body>
-             <h1>Burrow Kafka Offsets Exporter</h1>
+             <h1>floatcloud Kafka Offsets Exporter</h1>
              <p><a href='` + *metricsPath + `'>Metrics</a></p>
              </body>
              </html>`))
