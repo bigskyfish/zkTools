@@ -17,7 +17,7 @@ var (
 		"Address to listen on for telemetry")
 	metricsPath = flag.String("web.telemetry-path", "/metrics",
 		"Path under which to expose metrics")
-	kafkaFile = flag.String("config", "/Users/floatcloud/goWorkSpace/kafka-lag-exporter/kafka_lag_exporter.yml", "Config file location.")
+	kafkaFile = flag.String("config", "./kafka_lag_exporter.yml", "Config file location.")
 )
 
 func main() {
@@ -45,9 +45,9 @@ func main() {
 	http.Handle(*metricsPath, promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`<html>
-             <head><title>floatcloud Kafka Offsets Exporter</title></head>
+             <head><title>bigskyfish Kafka Offsets Exporter</title></head>
              <body>
-             <h1>floatcloud Kafka Offsets Exporter</h1>
+             <h1>bigskyfish Kafka Offsets Exporter</h1>
              <p><a href='` + *metricsPath + `'>Metrics</a></p>
              </body>
              </html>`))
