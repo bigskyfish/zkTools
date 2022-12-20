@@ -11,7 +11,7 @@ public class NIOClient {
     public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
         while (true){
-            Socket socket = new Socket("127.0.0.1", 8888);
+            Socket socket = new Socket("127.0.0.1", 9999);
             OutputStream outputStream = socket.getOutputStream();
             System.out.println("请输入：");
             String data = scan.next();
