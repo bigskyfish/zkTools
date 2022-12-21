@@ -98,6 +98,7 @@ public class Handler implements Runnable {
                     if (selectionKey.isReadable()){
                         // 如果当前是读事件，则读取数据
                         read(selectionKey);
+                        channel.register(selector, SelectionKey.OP_WRITE);
                     } else if (selectionKey.isWritable()){
                         // 如果当前是写事件，则写入数据
                         write(selectionKey);
